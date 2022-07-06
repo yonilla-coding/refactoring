@@ -1,4 +1,8 @@
 const statement = (invoice, plays) => {
+  return renderPlainText(invoice, plays);
+};
+
+const renderPlainText = (invoice, plays) => {
   let result = `청구 내역 (고객명: ${invoice.customer})\n`;
 
   const format = (aNumber) => {
