@@ -50,23 +50,14 @@ const createStatementData = (invoice, plays) => {
   };
 
   const totalAmount = (data) => {
-    let result = 0;
-
-    for (let perf of data.performances) {
-      result += perf.amount;
-    }
-
-    return result;
+    return data.performances.reduce((total, perf) => total + perf.amount, 0);
   };
 
   const totalVolumeCredits = (data) => {
-    let volumeCredits = 0;
-
-    for (let perf of data.performances) {
-      volumeCredits += perf.volumeCredits;
-    }
-
-    return volumeCredits;
+    return data.performances.reduce(
+      (total, perf) => total + perf.volumeCredits,
+      0
+    );
   };
 
   result.customer = invoice.customer;
