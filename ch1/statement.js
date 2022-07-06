@@ -8,26 +8,33 @@ const statement = (invoice, plays) => {
     minimumFractionDigits: 2,
   }).format;
 
-  for (let perf of invoice.performances) {
-    const play = plays[perf.playID];
-    let thisAmount = 0;
+  const amountFor = (aPerformance, play) => {
+    let result = 0;
 
     switch (play.type) {
       case "tragedy": {
-        thisAmount = 40000;
-        if (perf.audience > 30) thisAmount += 1000 * (perf.audience - 30);
+        result = 40000;
+        if (aPerformance.audience > 30)
+          result += 1000 * (aPerformance.audience - 30);
         break;
       }
       case "comedy": {
-        thisAmount = 30000;
-        if (perf.audience > 20)
-          thisAmount += 10000 + 500 * (perf.audience - 20);
-        thisAmount += 300 * perf.audience;
+        result = 30000;
+        if (aPerformance.audience > 20)
+          result += 10000 + 500 * (aPerformance.audience - 20);
+        result += 300 * aPerformance.audience;
         break;
       }
       default:
         throw new Error(`알 수 없는 장르: ${play.type}`);
     }
+
+    return result;
+  };
+
+  for (let perf of invoice.performances) {
+    const play = plays[perf.playID];
+    let thisAmount = amountFor(perf, play);
 
     volumeCredits += Math.max(perf.audience - 30, 0);
     if (play.type === "comedy") volumeCredits += Math.floor(perf.audience / 5);
