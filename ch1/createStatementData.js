@@ -1,3 +1,10 @@
+class Calculator {
+  constructor(aPerformance, aPlay) {
+    this.performance = aPerformance;
+    this.play = aPlay;
+  }
+}
+
 const createStatementData = (invoice, plays) => {
   const result = {};
 
@@ -40,9 +47,10 @@ const createStatementData = (invoice, plays) => {
   };
 
   const enrichPerformance = (aPerformance) => {
+    const calculator = new Calculator(aPerformance, playFor(aPerformance));
     const result = { ...aPerformance };
 
-    result.play = playFor(result);
+    result.play = calculator.play;
     result.amount = amountFor(result);
     result.volumeCredits = volumeCreditsFor(result);
 
