@@ -1,16 +1,19 @@
 {
-  "name": "yonilla",
-  "type": "module",
+  "name": "refactoring",
   "version": "1.0.0",
-  "description": "yonillaCoding - refactoring study",
+  "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon"
+    "test": "node --experimental-vm-modules node_modules/jest/bin/jest.js --watchAll"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "nodemon": "^2.0.19"
+    "jest": "^27.5.1"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
   }
 }
